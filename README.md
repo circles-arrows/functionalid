@@ -32,6 +32,7 @@ xirqlz.functionalid.next(String label) returns a value
 Label	The entity where you want to create the new functional id for
 
 Example:
+
 <img src="call_newid.png"/>
 
 ### Generate a batch of new ID's
@@ -82,4 +83,5 @@ xirqlz.functionalid.dropdefinition(String Label)
 ```
 
 Example:
+
 <img src="call_drop.png"/> 
