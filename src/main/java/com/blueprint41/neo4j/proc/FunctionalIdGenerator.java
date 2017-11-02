@@ -1,4 +1,4 @@
-package com.xirqlz.neo4j.proc;
+package com.blueprint41.neo4j.proc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class FunctionalIdGenerator {
 	@Context public Log log;
 	
 
-	@Procedure("xirqlz.functionalid.create")
+	@Procedure("blueprint41.functionalid.create")
 	@PerformsWrites
 	public Stream<FunctionalIdStateResult> create(@Name("Label") final String entity, @Name("prefix") final String prefix, @Name("startFrom") final long startFrom) throws Exception {
 		
@@ -66,7 +66,7 @@ public class FunctionalIdGenerator {
 		return Stream.of(res);
 	}
 	
-	@Procedure("xirqlz.functionalid.next")
+	@Procedure("blueprint41.functionalid.next")
 	@PerformsWrites
 	public synchronized Stream<StringResult> nextId(@Name("Label") final String entity) throws Exception {
 		
@@ -74,7 +74,7 @@ public class FunctionalIdGenerator {
 		
 	}
 	
-	@Procedure("xirqlz.functionalid.nextNumeric")
+	@Procedure("blueprint41.functionalid.nextNumeric")
 	@PerformsWrites
 	public synchronized Stream<StringResult> nextNumeric(@Name("Label") final String entity) throws Exception {
 		
@@ -82,7 +82,7 @@ public class FunctionalIdGenerator {
 		
 	}
 
-	@Procedure("xirqlz.functionalid.nextBatch")
+	@Procedure("blueprint41.functionalid.nextBatch")
 	@PerformsWrites
 	public synchronized Stream<StringResult> nextIdBatch(@Name("Label") final String entity, @Name("batchSize") long batchSize) throws Exception {
 		if (batchSize > MAX_BATCHSIZE) throw new Exception("The batchsize cannot be bigger then " + MAX_BATCHSIZE);
@@ -91,7 +91,7 @@ public class FunctionalIdGenerator {
 		
 	}
 	
-	@Procedure("xirqlz.functionalid.nextBatchNumeric")
+	@Procedure("blueprint41.functionalid.nextBatchNumeric")
 	@PerformsWrites
 	public synchronized Stream<StringResult> nextIdBatchNumeric(@Name("Label") final String entity, @Name("batchSize") long batchSize) throws Exception {
 		if (batchSize > MAX_BATCHSIZE) throw new Exception("The batchsize cannot be bigger then " + MAX_BATCHSIZE);
@@ -100,7 +100,7 @@ public class FunctionalIdGenerator {
 		
 	}
 	
-	@Procedure("xirqlz.functionalid.setSequenceNumber")
+	@Procedure("blueprint41.functionalid.setSequenceNumber")
 	@PerformsWrites
 	public synchronized Stream<StringResult> setSequenceNumber(@Name("Label") final String entity, @Name("number") long number, @Name("isNumeric") Boolean isNumeric) throws Exception {
 		StringResult res = null;
@@ -167,7 +167,7 @@ public class FunctionalIdGenerator {
 	}
 
 	
-	@Procedure("xirqlz.functionalid.current")
+	@Procedure("blueprint41.functionalid.current")
 	public Stream<FunctionalIdStateResult> showId(@Name("Label") final String entity) {
 		Node n = getEntityNode(entity);
 		
@@ -182,13 +182,13 @@ public class FunctionalIdGenerator {
 		return Stream.of(res);	
 	}
 	
-	@Procedure("xirqlz.hashing.decode")
+	@Procedure("blueprint41.hashing.decode")
 	public Stream<NumericResult> decode(@Name("encodedString") final String encodedString)  throws Exception{
 		NumericResult result = new NumericResult(Hashing.decodeIdentifier(encodedString));
 		return Stream.of(result);
 	}
 	
-	@Procedure("xirqlz.functionalid.list")
+	@Procedure("blueprint41.functionalid.list")
 	public Stream<FunctionalIdStateResult> showAll() {
 		
 		return dbs.findNodes(FUNCTIONALID_LABEL).stream().map(new Function<Node, FunctionalIdStateResult>() {
@@ -208,7 +208,7 @@ public class FunctionalIdGenerator {
 	}
 	
 	
-	@Procedure("xirqlz.functionalid.dropdefinition")
+	@Procedure("blueprint41.functionalid.dropdefinition")
 	@PerformsWrites
 	public Stream<StringResult> drop(@Name("Label") final String entity) {
 		StringResult res = new StringResult("");

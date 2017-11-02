@@ -1,6 +1,6 @@
-# xirqlz-apoc
+# blueprint41-apoc
 
-Xirqlz contains xirqlz neo4j procedures
+Blueprint41 contains blueprint41 neo4j procedures
 
 ## Functional ID generator
 
@@ -9,7 +9,7 @@ Functional Id's can be generated via a procedure on Neo4j (version 3+). The data
 ### Create Functional ID generator
 
 ```
-xirqlz.functionalid.create( String label, String prefix, long startFrom)
+blueprint41.functionalid.create( String label, String prefix, long startFrom)
 returns the FunctionalId state.
 ```
 |parameter|description|
@@ -26,7 +26,7 @@ Example:
 ### Create one new functional ID
 
 ```
-xirqlz.functionalid.next(String label) returns a value
+blueprint41.functionalid.next(String label) returns a value
 ```
 
 Label	The entity where you want to create the new functional id for
@@ -40,7 +40,7 @@ Example:
 This is handy when you want to do bulk loads. Note that a functional id is only generated once.
 
 ```
-xirqlz.functionalid.nextBatch(String label, long batchSize)
+blueprint41.functionalid.nextBatch(String label, long batchSize)
 returns a value
 ```
 |parameter|description|
@@ -56,7 +56,7 @@ Example:
 
 Show the current state of an functional Id generator.
 ```
-xirqlz.functionalid.current(String label)
+blueprint41.functionalid.current(String label)
 ```
 
 Example:
@@ -67,7 +67,7 @@ Example:
 ### List all functional id generators
 
 ```
-xirqlz.functionalid.list()
+blueprint41.functionalid.list()
 returns a list with all the functional id states.
 ```
 Example:
@@ -79,7 +79,7 @@ Example:
 HANDLE with care!!
 
 ```
-xirqlz.functionalid.dropdefinition(String Label)
+blueprint41.functionalid.dropdefinition(String Label)
 ```
 
 Example:

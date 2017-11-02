@@ -1,4 +1,4 @@
-package com.xirqlz.neo4j.proc;
+package com.blueprint41.neo4j.proc;
 
 import static org.junit.Assert.*;
 

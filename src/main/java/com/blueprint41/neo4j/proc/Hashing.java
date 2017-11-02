@@ -1,4 +1,4 @@
-package com.xirqlz.neo4j.proc;
+package com.blueprint41.neo4j.proc;
 
 public class Hashing {
 	private static final int[] map = new int[] { 4, 2, 3, 5, 7, 1, 0, 6, 15, 8, 13, 11, 14, 9, 12, 10 };

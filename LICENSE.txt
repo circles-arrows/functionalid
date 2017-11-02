@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright 2017 (c) Xirqlz-apoc
+Copyright 2017 (c) Blueprint41-apoc
 
 All rights reserved.
 
