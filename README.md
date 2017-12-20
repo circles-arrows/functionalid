@@ -1,4 +1,4 @@
-# blueprint41-apoc
+# blueprint41 functionalId
 
 Blueprint41 contains blueprint41 neo4j procedures
 
