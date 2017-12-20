@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright 2017 (c) Blueprint41-apoc
+Copyright 2017 (c) Blueprint41 FunctionalId
 
 All rights reserved.
 
