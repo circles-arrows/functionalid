@@ -54,14 +54,14 @@ public class Hashing {
 
         // convert base 36 string to integer
         long input2 = 0;
-        String upper = value.toUpperCase();
-        for (int index = 0; index < value.length(); index++)
+        String upper = value.toUpperCase().TrimStart('0');
+        for (int index = 0; index < upper.length(); index++)
         {
             int valueindex = base36Chars.indexOf(upper.charAt(index));
             if (valueindex == -1)
             	return -1;
 
-            input2 += (long)(valueindex * Math.pow(36, value.length() - index - 1));
+            input2 += (long)(valueindex * Math.pow(36, upper.length() - index - 1));
         }
         
         long input = input2 & 0x00000000FFFFFFFFL;
