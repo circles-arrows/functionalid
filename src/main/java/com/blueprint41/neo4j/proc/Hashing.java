@@ -54,7 +54,7 @@ public class Hashing {
 
         // convert base 36 string to integer
         long input2 = 0;
-        String upper = value.toUpperCase().TrimStart('0');
+        String upper = value.toUpperCase().replaceFirst("^0+(?!$)", "");
         for (int index = 0; index < upper.length(); index++)
         {
             int valueindex = base36Chars.indexOf(upper.charAt(index));
