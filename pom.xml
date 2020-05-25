@@ -2,17 +2,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.blueprint41.neo4j.proc</groupId>
   <artifactId>blueprint41</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
   <name>blueprint41</name>
   <description>Blueprint41 procedures</description>
   <properties>
-    <neo4j.version>3.0.1</neo4j.version>
+    <neo4j.version>4.0.0</neo4j.version>
   </properties>
-    <organization>
-    <name>Blueprint41</name>
+  <organization>
+    <name>CIRCLES ARROWS LIMITED</name>
     <url>http://blueprint41.com/</url>
   </organization>
-    <dependencies>
+  <dependencies>
     <dependency>
       <groupId>org.neo4j</groupId>
       <artifactId>neo4j-enterprise</artifactId>
