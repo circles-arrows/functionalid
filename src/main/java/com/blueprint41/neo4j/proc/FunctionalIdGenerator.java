@@ -55,7 +55,7 @@ public class FunctionalIdGenerator {
 	private synchronized Stream<FunctionalIdStateResult> createFunctionalId(final Transaction tx, final String entity,final String prefix, final long startFrom ) throws Exception {
 		Node n = getEntityNode(tx, entity);
 		if (n != null) throw new Exception("There is already a FunctionalId generator defined for Label " + entity);
-		if (Integer.MAX_VALUE - startFrom < MIN_FREESPACE) throw new Exception("The start value " + startFrom + " is to big there must be at least " + MIN_FREESPACE + " positions left to generate functional ids from");
+		if (Long.MAX_VALUE - startFrom < MIN_FREESPACE) throw new Exception("The start value " + startFrom + " is to big there must be at least " + MIN_FREESPACE + " positions left to generate functional ids from");
 	    if (prefix == null || prefix.trim().isEmpty()) throw new Exception("Prefix may not be empty");
 	    n = tx.createNode(FUNCTIONALID_LABEL);
 	    n.setProperty(PROP_LABEL, entity);
