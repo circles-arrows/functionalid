@@ -131,7 +131,7 @@ public class FunctionalIdGenerator {
 			String Uid = "";
 			for (long i = 0; i < batchSize; i++) {
 			
-				if (seq == Long.MAX_VALUE) throw new Exception("The sequence is exhausted cannot be bigger than Integer.MAX_VALUE ");
+				if (seq == Long.MAX_VALUE) throw new Exception("The sequence is exhausted cannot be bigger than Long.MAX_VALUE ");
 				seq++;
 				
 				// prefix
