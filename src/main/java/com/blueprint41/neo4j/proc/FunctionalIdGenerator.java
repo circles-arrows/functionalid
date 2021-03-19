@@ -10,10 +10,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import org.neo4j.logging.Log;
-import org.neo4j.procedure.Context;
-import org.neo4j.procedure.Name;
-import org.neo4j.procedure.Mode;
-import org.neo4j.procedure.Procedure;
+import org.neo4j.procedure.*;
 
 public class FunctionalIdGenerator {
 	private static final String PROP_SEQUENCE = "Sequence";
@@ -65,14 +62,28 @@ public class FunctionalIdGenerator {
 		FunctionalIdStateResult res = new FunctionalIdStateResult(entity,prefix,prefix + Hashing.encodeIdentifier(startFrom),startFrom);
 		return Stream.of(res);
 	}
-	
+
+	@UserFunction(name = "blueprint41.functionalid.fnNext")
+	public synchronized String fnNextId(@Name("Label") final String entity) throws Exception {
+
+		return generateId(entity, 1, false).findFirst().get().value;
+
+	}
+
 	@Procedure(name = "blueprint41.functionalid.next", mode = Mode.WRITE)
 	public synchronized Stream<StringResult> nextId(@Name("Label") final String entity) throws Exception {
 		
 		return generateId(entity, 1, false);
 		
 	}
-	
+
+	@UserFunction(name = "blueprint41.functionalid.fnNextNumeric")
+	public synchronized String fnNextNumeric(@Name("Label") final String entity) throws Exception {
+
+		return generateId(entity, 1, true).findFirst().get().value;
+
+	}
+
 	@Procedure(name = "blueprint41.functionalid.nextNumeric", mode = Mode.WRITE)
 	public synchronized Stream<StringResult> nextNumeric(@Name("Label") final String entity) throws Exception {
 		
@@ -139,7 +150,7 @@ public class FunctionalIdGenerator {
 				if(numeric == false)
 				{
 					prefix = (String) n.getProperty(PROP_PREFIX);
-					Uid = prefix + Hashing.encodeIdentifier(new Long(seq));
+					Uid = prefix + Hashing.encodeIdentifier(seq);
 					res = new StringResult(Uid);
 				}
 				else{
