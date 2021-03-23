@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="blueprint41:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/blueprint41_jar</output-path>
+    <root id="archive" name="blueprint41.jar">
+      <element id="module-output" name="blueprint41" />
+    </root>
+  </artifact>
+</component>

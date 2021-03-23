@@ -10,10 +10,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import org.neo4j.logging.Log;
-import org.neo4j.procedure.Context;
-import org.neo4j.procedure.Name;
-import org.neo4j.procedure.PerformsWrites;
-import org.neo4j.procedure.Procedure;
+import org.neo4j.procedure.*;
 
 public class FunctionalIdGenerator {
 	private static final String PROP_SEQUENCE = "Sequence";
@@ -55,7 +52,7 @@ public class FunctionalIdGenerator {
 	private synchronized Stream<FunctionalIdStateResult> createFunctionalId(final String entity,final String prefix, final long startFrom ) throws Exception {
 		Node n = getEntityNode(entity);
 		if (n != null) throw new Exception("There is already a FunctionalId generator defined for Label " + entity);
-		if (Integer.MAX_VALUE - startFrom < MIN_FREESPACE) throw new Exception("The start value " + startFrom + " is to big there must be at least " + MIN_FREESPACE + " positions left to generate functional ids from");
+		if (Long.MAX_VALUE - startFrom < MIN_FREESPACE) throw new Exception("The start value " + startFrom + " is to big there must be at least " + MIN_FREESPACE + " positions left to generate functional ids from");
 	    if (prefix == null || prefix.trim().isEmpty()) throw new Exception("Prefix may not be empty");
 	    n = dbs.createNode(FUNCTIONALID_LABEL);
 	    n.setProperty(PROP_LABEL, entity);
@@ -65,7 +62,15 @@ public class FunctionalIdGenerator {
 		FunctionalIdStateResult res = new FunctionalIdStateResult(entity,prefix,prefix + Hashing.encodeIdentifier(startFrom),startFrom);
 		return Stream.of(res);
 	}
-	
+
+	@UserFunction("blueprint41.functionalid.fnNext")
+	@PerformsWrites
+	public synchronized String fnNextId(@Name("Label") final String entity) throws Exception {
+
+		return generateId(entity, 1, false).findFirst().get().value;
+
+	}
+
 	@Procedure("blueprint41.functionalid.next")
 	@PerformsWrites
 	public synchronized Stream<StringResult> nextId(@Name("Label") final String entity) throws Exception {
@@ -73,7 +78,15 @@ public class FunctionalIdGenerator {
 		return generateId(entity, 1, false);
 		
 	}
-	
+
+	@UserFunction(name = "blueprint41.functionalid.fnNextNumeric")
+	@PerformsWrites
+	public synchronized String fnNextNumeric(@Name("Label") final String entity) throws Exception {
+
+		return generateId(entity, 1, true).findFirst().get().value;
+
+	}
+
 	@Procedure("blueprint41.functionalid.nextNumeric")
 	@PerformsWrites
 	public synchronized Stream<StringResult> nextNumeric(@Name("Label") final String entity) throws Exception {
@@ -136,7 +149,7 @@ public class FunctionalIdGenerator {
 			String Uid = "";
 			for (long i = 0; i < batchSize; i++) {
 			
-				if (seq == Long.MAX_VALUE) throw new Exception("The sequence is exhausted cannot be bigger than Integer.MAX_VALUE ");
+				if (seq == Long.MAX_VALUE) throw new Exception("The sequence is exhausted cannot be bigger than Long.MAX_VALUE ");
 				seq++;
 				
 				// prefix
